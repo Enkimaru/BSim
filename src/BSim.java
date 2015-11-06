@@ -17,7 +17,7 @@ public class BSim extends javax.swing.JFrame {
      */
     public BSim() {
         Stats st = new Stats();
-            st.setVisible(false);
+            st.setVisible(true);
         initComponents();
 
         for (int i = 0; i < 2; i++) {
