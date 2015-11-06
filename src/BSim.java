@@ -1,5 +1,7 @@
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -8,7 +10,7 @@ import javax.swing.JOptionPane;
  */
 public class BSim extends javax.swing.JFrame {
     ArrayList<Personagem> array = new ArrayList<>();
-    String[] d_nomes = {"Fulaninho11","WesleySafadão"};
+    String[] d_nomes = {"WesleySafadão","WesleySafadão"};
     
     
     /**
@@ -16,10 +18,27 @@ public class BSim extends javax.swing.JFrame {
      */
     public BSim() {
         Stats st = new Stats();
-            st.setVisible(true);
+            st.setVisible(false);
         initComponents();
-
-        for (int i = 0; i < 2; i++) {
+        String linha = null;
+        String[] leituraJogador = null;
+        File statsPlayer = new File("src/Arquivos/statsplayer.txt");
+        try {
+            FileReader arquivoJogadas = new FileReader(statsPlayer.getAbsolutePath());
+            BufferedReader leitor = new BufferedReader(arquivoJogadas);
+            while ((linha = leitor.readLine()) != null) {
+               
+                leituraJogador = linha.split ("/");
+            }
+            array.add(new Personagem(Integer.parseInt(leituraJogador[4]), 
+                    Integer.parseInt(leituraJogador[1]), Integer.parseInt(leituraJogador[2]),
+                    Integer.parseInt(leituraJogador[3]), leituraJogador[0]));
+        } catch(IOException e){
+	    	System.out.println("Error" + e);
+	    }
+        
+        
+        for (int i = 0; i < 1; i++) {
                         
 		String Nome = JOptionPane.showInputDialog(null,
         		"Nome do personagem " + st.getName1() +(i + 1), d_nomes[i]);
