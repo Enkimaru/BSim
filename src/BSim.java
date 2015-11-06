@@ -1,6 +1,5 @@
 
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -8,8 +7,8 @@ import javax.swing.JOptionPane;
  * @author Enki
  */
 public class BSim extends javax.swing.JFrame {
-    ArrayList<Personagem> array = new ArrayList<Personagem>();
-    String[] d_nomes = {"Fulaninho","WesleySafadão"};
+    ArrayList<Personagem> array = new ArrayList<>();
+    String[] d_nomes = {"Fulaninho11","WesleySafadão"};
     
     
     /**
