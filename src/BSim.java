@@ -1,8 +1,12 @@
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -11,6 +15,7 @@ import javax.swing.JOptionPane;
 public class BSim extends javax.swing.JFrame {
     ArrayList<Personagem> array = new ArrayList<>();
     String[] d_nomes = {"WesleySafadão","WesleySafadão"};
+    Timer timer;
     
     
     /**
@@ -33,41 +38,13 @@ public class BSim extends javax.swing.JFrame {
             array.add(new Personagem(Integer.parseInt(leituraJogador[4]), 
                     Integer.parseInt(leituraJogador[1]), Integer.parseInt(leituraJogador[2]),
                     Integer.parseInt(leituraJogador[3]), leituraJogador[0]));
+            array.add(new Personagem(Integer.parseInt(leituraJogador[4]), 
+                    Integer.parseInt(leituraJogador[1]), Integer.parseInt(leituraJogador[2]),
+                    Integer.parseInt(leituraJogador[3]), "Wesley Safadão"));
         } catch(IOException e){
 	    	System.out.println("Error" + e);
 	    }
         
-        
-        for (int i = 0; i < 1; i++) {
-                        
-		String Nome = JOptionPane.showInputDialog(null,
-        		"Nome do personagem " + st.getName1() +(i + 1), d_nomes[i]);
-		if (Nome == null)
-			Nome = "Fulano";
-
-		String aux = JOptionPane.showInputDialog("HP Máximo do personagem ["
-				+ Nome +"]", 250);
-		if (aux == null)
-			aux = "100";
-		int MAXHP = Integer.parseInt(aux);
-			aux = JOptionPane.showInputDialog("ATK do personagem ["
-				+ Nome+"]", (int) Math.floor(Math.random()*10));
-		if (aux == null)
-			aux = "1";
-		double ATK = Integer.parseInt(aux);
-			aux = JOptionPane.showInputDialog("DEF do personagem ["
-				+ Nome+"]", (int) Math.floor(Math.random()*10));
-		if (aux == null)
-			aux = "0";
-		double DEF = Integer.parseInt(aux);
-			aux = JOptionPane.showInputDialog("CRÍTICO do personagem ["
-				+ Nome+"]", (int) Math.floor(Math.random()*100));
-			if (aux == null)
-				aux = "0";
-			double CRIT = Integer.parseInt(aux);
-
-			array.add(new Personagem(MAXHP, ATK, DEF, CRIT, Nome));
-	}
       Name1.setText("[" + array.get(0).getName() + "]");
       MAXHP1.setText("/ " + array.get(0).getMAXHP());
       AtualHP1.setText(""+array.get(0).getMAXHP());
@@ -125,6 +102,7 @@ public class BSim extends javax.swing.JFrame {
         AtualHP2 = new javax.swing.JLabel();
         HPBar2 = new javax.swing.JProgressBar();
         HPBar1 = new javax.swing.JProgressBar();
+        HPBar3 = new javax.swing.JProgressBar();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -224,6 +202,7 @@ public class BSim extends javax.swing.JFrame {
         getContentPane().add(AtualHP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(359, 160, 50, -1));
         getContentPane().add(HPBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(359, 159, 101, -1));
         getContentPane().add(HPBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 159, 101, -1));
+        getContentPane().add(HPBar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 70, 10));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Poring.gif"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
@@ -238,7 +217,7 @@ public class BSim extends javax.swing.JFrame {
         jTextArea1.setOpaque(false);
         jScrollPane1.setViewportView(jTextArea1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 430, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 195, 430, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/bg.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -3, 490, 320));
@@ -248,54 +227,57 @@ public class BSim extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BattleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BattleButtonActionPerformed
-      array.get(0).dano();
-      array.get(1).dano();
-      array.get(0).setHPATUAL(array.get(1).getDANOATUAL());
-      array.get(1).setHPATUAL(array.get(0).getDANOATUAL());
-      AtualHP1.setText(""+array.get(0).getHPATUAL());
-      AtualHP2.setText(""+array.get(1).getHPATUAL());
-      HPBar1.setValue(array.get(0).getHPATUAL());
-      HPBar2.setValue(array.get(1).getHPATUAL());
-      if (array.get(1).getULTIMODANO()>0) {
-      jTextArea1.append("["+array.get(0).getName()+"] causou "+array.get(1).getULTIMODANO()+" de dano em ["
-              +array.get(1).getName()+"]      ");
-      
-      if(array.get(0).getACCRIT()) {
-          jTextArea1.append("»Dano Crítico!«");
-      }
-      
-      jTextArea1.append("\n");
-      }
-            if (array.get(0).getULTIMODANO()>0) {
-      jTextArea1.append("["+array.get(1).getName()+"] causou "+array.get(0).getULTIMODANO()+" de dano em ["
-              +array.get(0).getName()+"]      ");
-      
-      if(array.get(1).getACCRIT()) {
-          jTextArea1.append("»Dano Crítico!«");
-      }
-      
-      jTextArea1.append("\n");
-      }
-      
-      if (HPBar1.getValue() <= 0 | HPBar2.getValue() <=0){
-          BattleButton.setEnabled(false);
-      }
-      
-      if(HPBar1.getValue() <= 0) {
-          Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knightd.png")));
-          Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusadersit.png")));
-          jTextArea1.append(array.get(1).getName()+ " venceu!");
-      } else if (HPBar2.getValue() <= 0){
-          Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knightsit.png")));
-          Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusaderd.png")));
-          jTextArea1.append(array.get(0).getName()+ " venceu!");
-      } else if (HPBar1.getValue() <= 0 | HPBar2.getValue() <=0) {
-          jTextArea1.append("Os dois perderam!");
-          Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knightd.png")));
-          Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusaderd.png")));
-      }
-    }//GEN-LAST:event_BattleButtonActionPerformed
 
+            array.get(0).dano();
+            array.get(1).dano();
+            array.get(0).setHPATUAL(array.get(1).getDANOATUAL());
+            array.get(1).setHPATUAL(array.get(0).getDANOATUAL());
+            AtualHP1.setText("" + array.get(0).getHPATUAL());
+            AtualHP2.setText("" + array.get(1).getHPATUAL());
+            HPBar1.setValue(array.get(0).getHPATUAL());
+            HPBar2.setValue(array.get(1).getHPATUAL());
+            if (array.get(1).getULTIMODANO() > 0) {
+                jTextArea1.append("[" + array.get(0).getName() + "] causou " + array.get(1).getULTIMODANO() + " de dano em ["
+                        + array.get(1).getName() + "]      ");
+
+                if (array.get(0).getACCRIT()) {
+                    jTextArea1.append("»Dano Crítico!«");
+                }
+
+                jTextArea1.append("\n");
+            }
+            if (array.get(0).getULTIMODANO() > 0) {
+                jTextArea1.append("[" + array.get(1).getName() + "] causou " + array.get(0).getULTIMODANO() + " de dano em ["
+                        + array.get(0).getName() + "]      ");
+
+                if (array.get(1).getACCRIT()) {
+                    jTextArea1.append("»Dano Crítico!«");
+                }
+
+                jTextArea1.append("\n");
+            }
+
+            if (HPBar1.getValue() <= 0 | HPBar2.getValue() <= 0) {
+                BattleButton.setEnabled(false);
+            }
+
+            if (HPBar1.getValue() <= 0) {
+                Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knightd.png")));
+                Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusadersit.png")));
+                jTextArea1.append(array.get(1).getName() + " venceu!");
+            } else if (HPBar2.getValue() <= 0) {
+                Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knightsit.png")));
+                Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusaderd.png")));
+                jTextArea1.append(array.get(0).getName() + " venceu!");
+            } else if (HPBar1.getValue() <= 0 | HPBar2.getValue() <= 0) {
+                jTextArea1.append("Os dois perderam!");
+                Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knightd.png")));
+                Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusaderd.png")));
+            }
+        
+        
+    }//GEN-LAST:event_BattleButtonActionPerformed
+            
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
         BattleButton.setEnabled(true);
         Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knight1.png")));
@@ -308,8 +290,10 @@ public class BSim extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])  {
         /* Set the Nimbus look and feel */
+
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -336,7 +320,10 @@ public class BSim extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new BSim().setVisible(true);
+                
+                
             }
         });
     }
@@ -355,6 +342,7 @@ public class BSim extends javax.swing.JFrame {
     private javax.swing.JLabel DEF2;
     private javax.swing.JProgressBar HPBar1;
     private javax.swing.JProgressBar HPBar2;
+    private javax.swing.JProgressBar HPBar3;
     private javax.swing.JLabel MAXHP1;
     private javax.swing.JLabel MAXHP2;
     private javax.swing.JLabel Name1;
