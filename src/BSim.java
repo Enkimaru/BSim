@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  */
 public class BSim extends javax.swing.JFrame {
     ArrayList<Personagem> array = new ArrayList<Personagem>();
-    String[] d_nomes = {"Fulaninho","WesleySafadão"};
+    String[] d_nomes = {"Fulaninho","WesleySafadão1"};
     
     
     /**
