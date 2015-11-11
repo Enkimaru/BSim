@@ -1,3 +1,4 @@
+import java.awt.Point;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
@@ -8,7 +9,8 @@ import javax.swing.*;
  */
 public class BSim extends javax.swing.JFrame {
     ArrayList<Personagem> array = new ArrayList<>();
-    String[] d_nomes = {"WesleySafadão","WesleySafadão"};
+    String[] d_nomes = {"Fulaninho","Wesley"};
+    StatsFrame statsWindow = new StatsFrame();
     
     /**
      * Creates new form BSim
@@ -32,7 +34,7 @@ public class BSim extends javax.swing.JFrame {
                     Integer.parseInt(leituraJogador[3]), leituraJogador[0]));
             array.add(new Personagem(Integer.parseInt(leituraJogador[4]), 
                     Integer.parseInt(leituraJogador[1]), Integer.parseInt(leituraJogador[2]),
-                    Integer.parseInt(leituraJogador[3]), "Wesley Safadão"));
+                    Integer.parseInt(leituraJogador[3]), "Fulaninho"));
         } catch(IOException e){
 	    	System.out.println("Error" + e);
 	    }
@@ -99,6 +101,10 @@ public class BSim extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fulano Simulator");
@@ -214,6 +220,28 @@ public class BSim extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/bg.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -3, 490, 320));
 
+        jMenu1.setText("Character");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem1.setText("Stats");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -279,6 +307,18 @@ public class BSim extends javax.swing.JFrame {
         array.get(1).renovaHP();
     }//GEN-LAST:event_ResetButtonActionPerformed
 
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+     statsWindow.setjLabel2Text("UoU");
+     statsWindow.setVisible(true);
+     Point loc;
+     loc = getLocation();
+     statsWindow.setLocation(loc.x-300,loc.y-5);
+     
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -316,6 +356,8 @@ public class BSim extends javax.swing.JFrame {
                 new BSim().setVisible(true);
                 
                 
+                
+                
             }
         });
     }
@@ -342,6 +384,10 @@ public class BSim extends javax.swing.JFrame {
     private javax.swing.JButton ResetButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
