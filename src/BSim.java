@@ -1,8 +1,5 @@
 import java.awt.Point;
-import java.io.*;
 import java.util.*;
-import javax.swing.*;
-import static javax.swing.UIManager.getSystemLookAndFeelClassName;
 
 /**
  *
@@ -10,54 +7,19 @@ import static javax.swing.UIManager.getSystemLookAndFeelClassName;
  */
 public class BSim extends javax.swing.JFrame {
     ArrayList<Personagem> array = new ArrayList<>();
-    String[] d_nomes = {"Fulaninho","Wesley"};
     StatsFrame statsWindow = new StatsFrame();
+    
+    Player p1;
+    Leitura lt = new Leitura();
     
     /**
      * Creates new form BSim
      */
     public BSim() {
-        Stats st = new Stats();
-            st.setVisible(false);
-        initComponents();
-        String linha = null;
-        String[] leituraJogador = null;
-        File statsPlayer = new File("src/Arquivos/statsplayer.txt");
-        try {
-            FileReader arquivoJogadas = new FileReader(statsPlayer.getAbsolutePath());
-            BufferedReader leitor = new BufferedReader(arquivoJogadas);
-            while ((linha = leitor.readLine()) != null) {
-               
-                leituraJogador = linha.split ("/");
-            }
-            array.add(new Personagem(Integer.parseInt(leituraJogador[4]), 
-                    Integer.parseInt(leituraJogador[1]), Integer.parseInt(leituraJogador[2]),
-                    Integer.parseInt(leituraJogador[3]), leituraJogador[0]));
-            array.add(new Personagem(Integer.parseInt(leituraJogador[4]), 
-                    Integer.parseInt(leituraJogador[1]), Integer.parseInt(leituraJogador[2]),
-                    Integer.parseInt(leituraJogador[3]), "Fulaninho"));
-        } catch(IOException e){
-	    	System.out.println("Error" + e);
-	    }
         
-      Name1.setText("[" + array.get(0).getName() + "]");
-      MAXHP1.setText("/ " + array.get(0).getMAXHP());
-      AtualHP1.setText(""+array.get(0).getMAXHP());
-      ATK1.setText("• ATK : " + array.get(0).getATK());
-      DEF1.setText("• DEF : " + array.get(0).getDEF());
-      CRIT1.setText("• Crítico : " + array.get(0).getCRIT());
-      HPBar1.setMaximum(array.get(0).getMAXHP());
-      HPBar1.setValue(array.get(0).getHPATUAL());
-      Name2.setText("[" + array.get(1).getName() + "]");
-      AtualHP2.setText(""+array.get(1).getMAXHP());
-      MAXHP2.setText("/ " + array.get(1).getMAXHP());
-      ATK2.setText("• ATK : " + array.get(1).getATK());
-      DEF2.setText("• DEF : " + array.get(1).getDEF());
-      CRIT2.setText("• Crítico : " + array.get(1).getCRIT());
-      HPBar2.setMaximum(array.get(1).getMAXHP());
-      HPBar2.setValue(array.get(1).getHPATUAL());
-    
-      
+        initComponents();
+        p1 = lt.loadPlayer();
+       
     }
 
     /**
@@ -74,18 +36,6 @@ public class BSim extends javax.swing.JFrame {
         MAXHP1 = new javax.swing.JLabel();
         Name1.setText("Hello");
         Char1 = new javax.swing.JLabel();
-        ATK1 = new javax.swing.JLabel();
-        Name1.setText("Hello");
-        DEF1 = new javax.swing.JLabel();
-        Name1.setText("Hello");
-        CRIT1 = new javax.swing.JLabel();
-        Name1.setText("Hello");
-        ATK2 = new javax.swing.JLabel();
-        Name1.setText("Hello");
-        DEF2 = new javax.swing.JLabel();
-        Name1.setText("Hello");
-        CRIT2 = new javax.swing.JLabel();
-        Name1.setText("Hello");
         Name2 = new javax.swing.JLabel();
         Name1.setText("Hello");
         Char2 = new javax.swing.JLabel();
@@ -128,40 +78,6 @@ public class BSim extends javax.swing.JFrame {
         Char1.setPreferredSize(new java.awt.Dimension(240, 120));
         getContentPane().add(Char1, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 11, 101, -1));
 
-        ATK1.setBackground(new java.awt.Color(204, 204, 255));
-        ATK1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ATK1.setForeground(new java.awt.Color(255, 255, 255));
-        ATK1.setText("jLabel1");
-        getContentPane().add(ATK1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 80, -1));
-
-        DEF1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        DEF1.setForeground(new java.awt.Color(255, 255, 255));
-        DEF1.setText("jLabel1");
-        getContentPane().add(DEF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 80, -1));
-
-        CRIT1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        CRIT1.setForeground(new java.awt.Color(255, 255, 255));
-        CRIT1.setText("jLabel1");
-        getContentPane().add(CRIT1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 80, -1));
-
-        ATK2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        ATK2.setForeground(new java.awt.Color(255, 255, 255));
-        ATK2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        ATK2.setText("jLabel1");
-        getContentPane().add(ATK2, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 10, 80, -1));
-
-        DEF2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        DEF2.setForeground(new java.awt.Color(255, 255, 255));
-        DEF2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        DEF2.setText("jLabel1");
-        getContentPane().add(DEF2, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 30, 80, -1));
-
-        CRIT2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        CRIT2.setForeground(new java.awt.Color(255, 255, 255));
-        CRIT2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        CRIT2.setText("jLabel1");
-        getContentPane().add(CRIT2, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 50, 80, -1));
-
         Name2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         Name2.setForeground(new java.awt.Color(255, 255, 255));
         Name2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -200,6 +116,14 @@ public class BSim extends javax.swing.JFrame {
         AtualHP2.setText("250");
         getContentPane().add(AtualHP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(359, 160, 50, -1));
         getContentPane().add(HPBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(359, 159, 101, -1));
+
+        HPBar1.setBackground(new java.awt.Color(255, 255, 255));
+        HPBar1.setForeground(new java.awt.Color(0, 153, 0));
+        HPBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        HPBar1.setFocusable(false);
+        HPBar1.setString("");
+        HPBar1.setStringPainted(true);
+        HPBar1.setVerifyInputWhenFocusTarget(false);
         getContentPane().add(HPBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 159, 101, -1));
         getContentPane().add(HPBar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 70, 10));
 
@@ -213,7 +137,6 @@ public class BSim extends javax.swing.JFrame {
         jTextArea1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         jTextArea1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jTextArea1.setEnabled(false);
-        jTextArea1.setOpaque(false);
         jScrollPane1.setViewportView(jTextArea1);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 195, 430, -1));
@@ -300,12 +223,14 @@ public class BSim extends javax.swing.JFrame {
     }//GEN-LAST:event_BattleButtonActionPerformed
             
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
-        BattleButton.setEnabled(true);
+       
+        System.out.print(p1.toString());
+        /*BattleButton.setEnabled(true);
         Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knight1.png")));
         Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusader1.png")));
         jTextArea1.setText("");
         array.get(0).renovaHP();
-        array.get(1).renovaHP();
+        array.get(1).renovaHP();*/
     }//GEN-LAST:event_ResetButtonActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
@@ -333,7 +258,7 @@ public class BSim extends javax.swing.JFrame {
          */
                 try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -351,30 +276,24 @@ public class BSim extends javax.swing.JFrame {
         
 
         /* Create and display the form */
+        Stats st = new Stats();
+        st.setVisible(false);
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
                 new BSim().setVisible(true);
-                
-                
-                
-                
+ 
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ATK1;
-    private javax.swing.JLabel ATK2;
     private javax.swing.JLabel AtualHP1;
     private javax.swing.JLabel AtualHP2;
     private javax.swing.JButton BattleButton;
-    private javax.swing.JLabel CRIT1;
-    private javax.swing.JLabel CRIT2;
     private javax.swing.JLabel Char1;
     private javax.swing.JLabel Char2;
-    private javax.swing.JLabel DEF1;
-    private javax.swing.JLabel DEF2;
     private javax.swing.JProgressBar HPBar1;
     private javax.swing.JProgressBar HPBar2;
     private javax.swing.JProgressBar HPBar3;

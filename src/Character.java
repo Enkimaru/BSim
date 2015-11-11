@@ -150,6 +150,11 @@ public class Character {
     public void setCRIT(double CRIT) {
         this.CRIT = CRIT;
     }
+
+    @Override
+    public String toString() {
+        return "Character{" + "name=" + name + ", level=" + level + ", STR=" + STR + ", DEX=" + DEX + ", AGI=" + AGI + ", INT=" + INT + ", LUK=" + LUK + ", VIT=" + VIT + ", MAXHP=" + MAXHP + ", MAXSP=" + MAXSP + ", wATK=" + wATK + ", wDEF=" + wDEF + ", ATK=" + ATK + ", DEF=" + DEF + ", CRIT=" + CRIT + '}';
+    }
     
     
     
