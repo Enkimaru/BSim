@@ -1,12 +1,6 @@
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
+import java.util.*;
+import javax.swing.*;
 
 /**
  *
@@ -15,8 +9,6 @@ import javax.swing.Timer;
 public class BSim extends javax.swing.JFrame {
     ArrayList<Personagem> array = new ArrayList<>();
     String[] d_nomes = {"WesleySafadão","WesleySafadão"};
-    Timer timer;
-    
     
     /**
      * Creates new form BSim
@@ -108,7 +100,7 @@ public class BSim extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Fulano Simulator");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setMinimumSize(new java.awt.Dimension(490, 339));
