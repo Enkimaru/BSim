@@ -6,9 +6,8 @@ import java.util.*;
  * @author Enki
  */
 public class BSim extends javax.swing.JFrame {
-    ArrayList<Personagem> array = new ArrayList<>();
     StatsFrame statsWindow = new StatsFrame();
-    
+    ArrayList<Monster> monster = new ArrayList<>();
     Player p1;
     Leitura lt = new Leitura();
     
@@ -19,6 +18,8 @@ public class BSim extends javax.swing.JFrame {
         
         initComponents();
         p1 = lt.loadPlayer();
+        monster = lt.loadMonster();
+        
        
     }
 
@@ -172,60 +173,59 @@ public class BSim extends javax.swing.JFrame {
 
     private void BattleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BattleButtonActionPerformed
 
-            array.get(0).dano();
-            array.get(1).dano();
-            array.get(0).setHPATUAL(array.get(1).getDANOATUAL());
-            array.get(1).setHPATUAL(array.get(0).getDANOATUAL());
-            AtualHP1.setText("" + array.get(0).getHPATUAL());
-            AtualHP2.setText("" + array.get(1).getHPATUAL());
-            HPBar1.setValue(array.get(0).getHPATUAL());
-            HPBar2.setValue(array.get(1).getHPATUAL());
-            if (array.get(1).getULTIMODANO() > 0) {
-                jTextArea1.append("[" + array.get(0).getName() + "] causou " + array.get(1).getULTIMODANO() + " de dano em ["
-                        + array.get(1).getName() + "]      ");
-
-                if (array.get(0).getACCRIT()) {
-                    jTextArea1.append("»Dano Crítico!«");
-                }
-
-                jTextArea1.append("\n");
-            }
-            if (array.get(0).getULTIMODANO() > 0) {
-                jTextArea1.append("[" + array.get(1).getName() + "] causou " + array.get(0).getULTIMODANO() + " de dano em ["
-                        + array.get(0).getName() + "]      ");
-
-                if (array.get(1).getACCRIT()) {
-                    jTextArea1.append("»Dano Crítico!«");
-                }
-
-                jTextArea1.append("\n");
-            }
-
-            if (HPBar1.getValue() <= 0 | HPBar2.getValue() <= 0) {
-                BattleButton.setEnabled(false);
-            }
-
-            if (HPBar1.getValue() <= 0) {
-                Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knightd.png")));
-                Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusadersit.png")));
-                jTextArea1.append(array.get(1).getName() + " venceu!");
-            } else if (HPBar2.getValue() <= 0) {
-                Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knightsit.png")));
-                Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusaderd.png")));
-                jTextArea1.append(array.get(0).getName() + " venceu!");
-            } else if (HPBar1.getValue() <= 0 | HPBar2.getValue() <= 0) {
-                jTextArea1.append("Os dois perderam!");
-                Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knightd.png")));
-                Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusaderd.png")));
-            }
+        /*array.get(0).dano();
+        array.get(1).dano();
+        array.get(0).setHPATUAL(array.get(1).getDANOATUAL());
+        array.get(1).setHPATUAL(array.get(0).getDANOATUAL());
+        AtualHP1.setText("" + array.get(0).getHPATUAL());
+        AtualHP2.setText("" + array.get(1).getHPATUAL());
+        HPBar1.setValue(array.get(0).getHPATUAL());
+        HPBar2.setValue(array.get(1).getHPATUAL());
+        if (array.get(1).getULTIMODANO() > 0) {
+        jTextArea1.append("[" + array.get(0).getName() + "] causou " + array.get(1).getULTIMODANO() + " de dano em ["
+        + array.get(1).getName() + "]      ");
         
+        if (array.get(0).getACCRIT()) {
+        jTextArea1.append("»Dano Crítico!«");
+        }
+        
+        jTextArea1.append("\n");
+        }
+        if (array.get(0).getULTIMODANO() > 0) {
+        jTextArea1.append("[" + array.get(1).getName() + "] causou " + array.get(0).getULTIMODANO() + " de dano em ["
+        + array.get(0).getName() + "]      ");
+        
+        if (array.get(1).getACCRIT()) {
+        jTextArea1.append("»Dano Crítico!«");
+        }
+        
+        jTextArea1.append("\n");
+        }
+        
+        if (HPBar1.getValue() <= 0 | HPBar2.getValue() <= 0) {
+        BattleButton.setEnabled(false);
+        }
+        
+        if (HPBar1.getValue() <= 0) {
+        Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knightd.png")));
+        Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusadersit.png")));
+        jTextArea1.append(array.get(1).getName() + " venceu!");
+        } else if (HPBar2.getValue() <= 0) {
+        Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knightsit.png")));
+        Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusaderd.png")));
+        jTextArea1.append(array.get(0).getName() + " venceu!");
+        } else if (HPBar1.getValue() <= 0 | HPBar2.getValue() <= 0) {
+        jTextArea1.append("Os dois perderam!");
+        Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knightd.png")));
+        Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusaderd.png")));
+        }
+        */
         
     }//GEN-LAST:event_BattleButtonActionPerformed
             
     private void ResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButtonActionPerformed
-       
-        System.out.print(p1.toString());
-        /*BattleButton.setEnabled(true);
+      System.out.print(monster.toString());
+        /*        BattleButton.setEnabled(true);
         Char1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/knight1.png")));
         Char2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/crusader1.png")));
         jTextArea1.setText("");
